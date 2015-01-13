@@ -28,7 +28,7 @@ meteor.on('close', function (code) {
 });
 
 meteor.stdout.on('data', function startTesting(data) {
-  var data = data.toString();
+  data = data.toString();
   if(data.match(/10015|test-in-console listening/)) {
     console.log('starting testing...');
     meteor.stdout.removeListener('data', startTesting);
@@ -37,7 +37,7 @@ meteor.stdout.on('data', function startTesting(data) {
 });
 
 function runTestSuite() {
-  process.env.URL = "http://localhost:10015/"
+  process.env.URL = "http://localhost:10015/";
   var phantomjs = spawn('phantomjs', ['./phantom_runner.js']);
   phantomjs.stdout.pipe(process.stdout);
   phantomjs.stderr.pipe(process.stderr);
