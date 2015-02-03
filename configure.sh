@@ -1,8 +1,8 @@
 #!/bin/sh
 
 #configuring the system
-wget https://raw.github.com/oafmedium/codeship-meteor-packages/master/start_test.js
-wget https://raw.github.com/oafmedium/codeship-meteor-packages/master/phantom_runner.js
+wget https://raw.github.com/mhwheeler/codeship-meteor-packages/master/start_test.js
+wget https://raw.github.com/mhwheeler/codeship-meteor-packages/master/phantom_runner.js
 
 # run tests
 node start_test.js
