@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 var spawn = require('child_process').spawn;
+var fs = require('fs');
 
 var workingDir = process.env.WORKING_DIR || process.env.PACKAGE_DIR || './';
 var args = ['test-packages', '--once', '--driver-package', 'test-in-console', '-p', 10015];
@@ -9,6 +10,13 @@ if (typeof process.env.METEOR_RELEASE !== 'undefined' &&
     process.env.METEOR_RELEASE !== '') {
     args.push('--release');
     args.push(process.env.METEOR_RELEASE);
+}
+
+if (typeof process.env.PACKAGES === 'undefined' && fs.existsSync(workingDir + 'package.js')) {
+  args.push('./');
+}
+else if (typeof process.env.PACKAGES !== 'undefined' && process.env.PACKAGES !== '') {
+  args = args.concat(process.env.PACKAGES.split(';'));
 }
 
 var meteor = spawn((process.env.TEST_COMMAND || 'meteor'), args, {cwd: workingDir});
